@@ -1,0 +1,32 @@
+#calculator {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 300px;
+    height: 500px;
+    gap: 1em;
+}
+
+#screen {
+    height: 75px;
+    font-size: 45px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    border: solid 1px black;
+}
+
+button {
+    flex-grow: 1;
+    font-size: 20px;
+}
+
+#row1,
+#row2,
+#row3,
+#row4,
+#row5 {
+    display: flex;
+    flex-grow: 1;
+    gap: 1em;
+}
