@@ -82,7 +82,7 @@ decimalButton.addEventListener("click", () => {
 // Execute event handler
 executeButton.addEventListener("click", () => {
     console.log(total, operation, current);
-    decimalFlag = false;
+    // decimalFlag = false;
     if (operation == "+") total = current = add(total, current);
     else if (operation == "-") total = current = subtract(total, current);
     else if (operation == "/") total = current = divide(total, current);
@@ -100,5 +100,6 @@ const multiply = (a, b) => Number(a) * Number(b);
 
 /*
 3.7 - 2 FIXED
-2.1 + 2.2 
+2.1 + 2.2 FIXED
+1.4 * 3
 */
