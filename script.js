@@ -2,69 +2,80 @@ const altButtons = ["clear", "delete", "="];
 const actionButtons = ["/", "x", "-", "+"];
 let total = 0,
     current = 0,
-    operation = "";
+    operation = "",
+    decimalFlag = false;
 
+// Objects
 const numericButtons = document.querySelectorAll(".numeric-button");
 const screen = document.querySelector("#screen");
 const deleteButton = document.querySelector("#delete");
 const clearButton = document.querySelector("#clear");
-const addButton = document.querySelector("#add");
-const subtractButton = document.querySelector("#subtract");
-const divideButton = document.querySelector("#divide");
-const multiplyButton = document.querySelector("#multiply");
+const operationButtons = document.querySelectorAll(".operation");
 const executeButton = document.querySelector("#execute");
+const decimalButton = document.querySelector("#decimal");
 
+// Numeric event handler
 numericButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
-        if (operation.length == 0) {
-            current = current * 10 + Number(e.target.value);
-            screen.textContent = current;
+        if (!decimalFlag) {
+            if (operation.length == 0) {
+                current = current * 10 + Number(e.target.value);
+                screen.textContent = current;
+            } else {
+                current = current * 10 + Number(e.target.value);
+                screen.textContent = current;
+            }
         } else {
-            total = current;
-            current = 0;
-            current = current * 10 + Number(e.target.value);
-            screen.textContent = current;
+            if (operation.length == 0) {
+                current += e.target.value;
+                screen.textContent = current;
+            } else {
+                current += e.target.value;
+                screen.textContent = current;
+            }
         }
     });
 });
 
+// Clear event handler
 clearButton.addEventListener("click", () => {
     total = 0;
     current = 0;
     operation = "";
+    decimalFlag = false;
     screen.textContent = 0;
 });
 
+// Delete event handler
 deleteButton.addEventListener("click", () => {
     current = Math.floor(current / 10);
     screen.textContent = current;
 });
 
-addButton.addEventListener("click", () => {
-    operation = "+";
-    total = current;
-    console.log("Operation + set.");
+// Operations event handler
+operationButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+        decimalFlag = false;
+        operation = e.target.value;
+        total = current;
+        current = 0;
+        console.log(`Operation: ${e.target.value} Total ${total}`);
+    });
 });
 
-subtractButton.addEventListener("click", () => {
-    operation = "-";
-    total = current;
-    console.log("Operation - set");
+// Decimal event handler
+decimalButton.addEventListener("click", () => {
+    if (!decimalFlag) {
+        decimalFlag = true;
+        current = current + ".";
+        screen.textContent = current;
+    }
 });
 
-divideButton.addEventListener("click", () => {
-    operation = "/";
-    total = current;
-    console.log("Operation / set");
-});
-
-multiplyButton.addEventListener("click", () => {
-    operation = "x";
-    total = current;
-    console.log("Operation x set");
-});
-
+// Execute event handler
 executeButton.addEventListener("click", () => {
+    console.log(total, operation, current);
+    decimalFlag = false;
     if (operation == "+") total = current = add(total, current);
     else if (operation == "-") total = current = subtract(total, current);
     else if (operation == "/") total = current = divide(total, current);
@@ -74,7 +85,8 @@ executeButton.addEventListener("click", () => {
     operation = "";
 });
 
-const add = (a, b) => a + b;
-const subtract = (a, b) => a - b;
-const divide = (a, b) => a / b;
-const multiply = (a, b) => a * b;
+// Operations
+const add = (a, b) => Number(a) + Number(b);
+const subtract = (a, b) => Number(a) - Number(b);
+const divide = (a, b) => Number(a) / Number(b);
+const multiply = (a, b) => Number(a) * Number(b);

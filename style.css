@@ -7,17 +7,18 @@
     gap: 1em;
     padding: 1em;
     border: solid 1px black;
-    border-radius: 5px;
+    border-radius: 15px;
 }
 
 #screen {
     height: 75px;
     font-size: 45px;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: flex-end;
     border: solid 1px black;
     border-radius: 5px;
+    padding-right: 0.5em;
 }
 
 button {
