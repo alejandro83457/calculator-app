@@ -93,7 +93,12 @@ executeButton.addEventListener("click", () => {
 });
 
 // Operations
-const add = (a, b) => Number(a) + Number(b);
-const subtract = (a, b) => Number(a) - Number(b);
+const add = (a, b) => (Number(a) * 100 + Number(b) * 100) / 100;
+const subtract = (a, b) => (Number(a) * 100 - Number(b) * 100) / 100;
 const divide = (a, b) => (Number(a) / Number(b)).toFixed(3);
 const multiply = (a, b) => Number(a) * Number(b);
+
+/*
+3.7 - 2 FIXED
+2.1 + 2.2 
+*/
