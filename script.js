@@ -65,10 +65,10 @@ multiplyButton.addEventListener("click", () => {
 });
 
 executeButton.addEventListener("click", () => {
-    if (operation == "+") total = add(total, current);
-    else if (operation == "-") total = subtract(total, current);
-    else if (operation == "/") total = divide(total, current);
-    else if (operation == "x") total = multiply(total, current);
+    if (operation == "+") total = current = add(total, current);
+    else if (operation == "-") total = current = subtract(total, current);
+    else if (operation == "/") total = current = divide(total, current);
+    else if (operation == "x") total = current = multiply(total, current);
     else console.log("Operation is not set.");
     screen.textContent = total;
     operation = "";
