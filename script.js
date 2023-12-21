@@ -1,13 +1,23 @@
-const someButtons = ["clear", "delete", "="];
+const altButtons = ["clear", "delete", "="];
+const actionButtons = ["/", "x", "-", "+"];
+let total = 0,
+    current = 0,
+    decimalSet = false;
 
-const buttons = document.querySelectorAll("button");
+const numericButtons = document.querySelectorAll(".numeric-button");
 const screen = document.querySelector("#screen");
+const deleteButton = document.querySelector("#delete");
 
-buttons.forEach((button) => {
+numericButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
-        let val = e.target.value;
-        if (someButtons.includes(val) == 0) screen.textContent = val;
+        current = current * 10 + Number(e.target.value);
+        screen.textContent = current;
     });
+});
+
+deleteButton.addEventListener("click", () => {
+    current = Math.floor(current / 10);
+    screen.textContent = current;
 });
 
 const add = (a, b) => a + b;
