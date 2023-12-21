@@ -48,8 +48,15 @@ clearButton.addEventListener("click", () => {
 
 // Delete event handler
 deleteButton.addEventListener("click", () => {
-    current = Math.floor(current / 10);
-    screen.textContent = current;
+    if (!decimalFlag) {
+        current = Math.floor(current / 10);
+        screen.textContent = current;
+    } else {
+        current = current.split("");
+        if (current.pop() == ".") decimalFlag = false;
+        current = current.join("");
+        screen.textContent = current;
+    }
 });
 
 // Operations event handler
@@ -88,5 +95,5 @@ executeButton.addEventListener("click", () => {
 // Operations
 const add = (a, b) => Number(a) + Number(b);
 const subtract = (a, b) => Number(a) - Number(b);
-const divide = (a, b) => Number(a) / Number(b);
+const divide = (a, b) => (Number(a) / Number(b)).toFixed(3);
 const multiply = (a, b) => Number(a) * Number(b);
